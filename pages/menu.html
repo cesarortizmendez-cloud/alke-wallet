@@ -11,6 +11,11 @@
 
 <body class="bg-soft" data-page="menu">
 
+  <!-- Página: Menú principal. El atributo `data-page="menu"` permite a los scripts
+    detectar y ejecutar solo la lógica necesaria para esta vista. -->
+
+  <!-- Barra de navegación: enlaces a las secciones principales y botón de salir.
+    La estructura usa clases de Bootstrap para responsividad. -->
   <nav class="navbar navbar-expand-lg bg-white border-bottom">
     <div class="container">
       <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a>
@@ -35,9 +40,11 @@
       <div class="col-12 col-lg-6">
         <div class="card card-hover border-0">
           <div class="card-body">
-            <h2 class="h6 text-secondary mb-1">Saldo disponible</h2>
-            <div id="balanceValue" class="h2 money mb-0">$0</div>
-            <div class="small-help mt-2">Se actualiza después de depósitos y transferencias.</div>
+              <h2 class="h6 text-secondary mb-1">Saldo disponible</h2>
+              <!-- `#balanceValue` se llena dinámicamente desde `wallet.js` usando los datos
+                del usuario (saldo actual). Mantener el id para la actualización por JS. -->
+              <div id="balanceValue" class="h2 money mb-0">$0</div>
+            
           </div>
         </div>
       </div>
@@ -45,7 +52,8 @@
       <div class="col-12 col-lg-6">
         <div class="card card-hover border-0">
           <div class="card-body">
-            <h2 class="h6 text-secondary mb-3">Acciones rápidas</h2>
+            <h2 class="h6 text-secondary mb-3">Acceso directo</h2>
+            <!-- Accesos rápidos hacia las páginas de depósito, envío y movimientos. -->
             <div class="d-grid gap-2">
               <a class="btn btn-primary" href="deposit.html">Ir a Depósitos / Retiros</a>
               <a class="btn btn-outline-primary" href="sendmoney.html">Enviar dinero</a>
@@ -57,13 +65,19 @@
     </div>
   </main>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/ui.js"></script>
-  <script src="../assets/js/auth.js"></script>
-  <script src="../assets/js/wallet.js"></script>
-  <script src="../assets/js/app.js"></script>
+    <!-- Orden de scripts: primero utilidades/datos, luego manejo de UI, auth y lógica de wallet.
+      - data.js: carga/gestiona datos locales (ej. usuarios, transacciones simuladas)
+      - ui.js: helpers para renderizar elementos y formatear valores
+      - auth.js: controla sesión, login/logout y redirecciones
+      - wallet.js: lógica de saldo, depósitos y envíos (actualiza `#balanceValue`)
+      - app.js: inicialización general que enlaza todo lo anterior en la vista -->
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/ui.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/wallet.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>

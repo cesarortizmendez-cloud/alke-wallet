@@ -1,82 +1,82 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Enviar dinero | Alke Wallet</title>
+<!doctype html> <!-- Declara el tipo de documento HTML5 -->
+<html lang="es"> <!-- Idioma de la página: español -->
+<head> <!-- Inicio de la cabeza del documento -->
+  <meta charset="utf-8" /> <!-- Juego de caracteres UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+  <title>Enviar dinero | Alke Wallet</title> <!-- Título que aparece en la pestaña del navegador -->
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS desde CDN -->
+  <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Estilos personalizados -->
+</head> <!-- Fin de head -->
 
-<body class="bg-soft" data-page="sendmoney">
+<body class="bg-soft" data-page="sendmoney"> <!-- Cuerpo: `data-page` identifica la vista para JS -->
 
-  <nav class="navbar navbar-expand-lg bg-white border-bottom">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom"> <!-- Barra de navegación -->
+    <div class="container"> <!-- Contenedor centrado -->
+      <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a> <!-- Logo/enlace al menú -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"> <!-- Botón hamburguesa -->
+        <span class="navbar-toggler-icon"></span> <!-- Icono del toggler -->
       </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto gap-2">
-          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li>
-          <li class="nav-item"><a class="nav-link" href="deposit.html">Depósitos</a></li>
-          <li class="nav-item"><a class="nav-link" href="transactions.html">Movimientos</a></li>
-          <li class="nav-item"><button class="btn btn-outline-danger btn-sm" onclick="logout()">Salir</button></li>
+      <div id="nav" class="collapse navbar-collapse"> <!-- Sección colapsable de la nav -->
+        <ul class="navbar-nav ms-auto gap-2"> <!-- Menú a la derecha -->
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li> <!-- Enlace a menú -->
+          <li class="nav-item"><a class="nav-link" href="deposit.html">Depósitos</a></li> <!-- Enlace a depósitos -->
+          <li class="nav-item"><a class="nav-link" href="transactions.html">Movimientos</a></li> <!-- Enlace a movimientos -->
+          <li class="nav-item"><button class="btn btn-outline-danger btn-sm" onclick="logout()">Salir</button></li> <!-- Botón logout -->
         </ul>
       </div>
     </div>
   </nav>
 
-  <main class="container py-4" style="max-width: 860px;">
-    <div class="row g-3">
+  <main class="container py-4" style="max-width: 860px;"> <!-- Contenedor principal con ancho máximo -->
+    <div class="row g-3"> <!-- Grid de Bootstrap -->
 
-      <div class="col-12 col-lg-5">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <h1 class="h5 mb-3">Enviar dinero</h1>
+      <div class="col-12 col-lg-5"> <!-- Columna izquierda: formulario de envío -->
+        <div class="card border-0 shadow-sm"> <!-- Tarjeta para agrupar contenido -->
+          <div class="card-body p-4"> <!-- Cuerpo de la tarjeta -->
+            <h1 class="h5 mb-3">Enviar dinero</h1> <!-- Título de la sección -->
 
-            <div class="mb-3">
-              <div class="text-secondary">Saldo actual</div>
-              <div id="balanceValue" class="h4 money">$0</div>
+            <div class="mb-3"> <!-- Bloque de saldo -->
+              <div class="text-secondary">Saldo actual</div> <!-- Etiqueta saldo -->
+              <div id="balanceValue" class="h4 money">$0</div> <!-- Saldo mostrado dinámicamente -->
             </div>
 
-            <!-- Buscar contacto + autocompletar -->
-            <label class="form-label">Buscar contacto</label>
-            <input id="contactSearch" class="form-control" type="text" placeholder="Escribe nombre o cuenta...">
-            <div id="suggestions" class="list-group mt-2"></div>
+            <!-- Buscar contacto + autocompletar --> <!-- Comentario funcional (no visible) -->
+            <label class="form-label">Buscar contacto</label> <!-- Label campo búsqueda -->
+            <input id="contactSearch" class="form-control" type="text" placeholder="Escribe nombre o cuenta..."> <!-- Campo búsqueda contacto -->
+            <div id="suggestions" class="list-group mt-2"></div> <!-- Contenedor sugerencias autocompletado -->
 
-            <input id="contactSelected" type="hidden">
+            <input id="contactSelected" type="hidden"> <!-- Campo hidden para contacto seleccionado -->
 
-            <div class="d-flex gap-2 mt-3">
-              <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#newContactModal">
-                + Agregar contacto
+            <div class="d-flex gap-2 mt-3"> <!-- Botón para abrir modal de nuevo contacto -->
+              <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#newContactModal"> <!-- Abrir modal -->
+                + Agregar contacto <!-- Texto del botón -->
               </button>
             </div>
 
-            <hr class="my-4">
+            <hr class="my-4"> <!-- Separador -->
 
-            <!-- Form transferencia (validación básica) -->
-            <form id="sendForm" novalidate>
-              <div class="mb-3">
-                <label class="form-label">Monto a transferir</label>
-                <input id="amount" class="form-control" type="number" min="1" required placeholder="Ej: 10000">
+            <!-- Form transferencia (validación básica) --> <!-- Comentario funcional -->
+            <form id="sendForm" novalidate> <!-- Formulario de envío; `novalidate` para validación personalizada -->
+              <div class="mb-3"> <!-- Campo monto -->
+                <label class="form-label">Monto a transferir</label> <!-- Etiqueta monto -->
+                <input id="amount" class="form-control" type="number" min="1" required placeholder="Ej: 10000"> <!-- Input monto con restricciones -->
               </div>
 
-              <button class="btn btn-primary w-100" type="submit">Enviar</button>
-              <p class="small-help mt-2 mb-0">La transferencia es simulada y queda registrada en movimientos.</p>
+              <button class="btn btn-primary w-100" type="submit">Enviar</button> <!-- Botón enviar -->
+              <p class="small-help mt-2 mb-0">La transferencia es simulada y queda registrada en movimientos.</p> <!-- Nota informativa -->
             </form>
 
           </div>
         </div>
       </div>
 
-      <div class="col-12 col-lg-7">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <h2 class="h6 text-secondary mb-2">Tip</h2>
-            <p class="mb-0">
-              Escribe “Ana”, “Bruno”, “Carla” o una cuenta como “111-222” para ver el autocompletado.
+      <div class="col-12 col-lg-7"> <!-- Columna derecha: tip/ayuda -->
+        <div class="card border-0 shadow-sm"> <!-- Tarjeta de ayuda -->
+          <div class="card-body p-4"> <!-- Cuerpo de tarjeta -->
+            <h2 class="h6 text-secondary mb-2">Tip</h2> <!-- Título pequeño -->
+            <p class="mb-0"> <!-- Párrafo explicativo -->
+              Escribe “Ana”, “Bruno”, “Carla” o una cuenta como “111-222” para ver el autocompletado. <!-- Ejemplos para autocompletar -->
             </p>
           </div>
         </div>
@@ -85,45 +85,45 @@
     </div>
   </main>
 
-  <!-- Modal agregar contacto -->
-  <div class="modal fade" id="newContactModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form id="newContactForm">
-          <div class="modal-header">
-            <h5 class="modal-title">Nuevo contacto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  <!-- Modal agregar contacto --> <!-- Inicio del modal para nuevo contacto -->
+  <div class="modal fade" id="newContactModal" tabindex="-1"> <!-- Modal bootstrap -->
+    <div class="modal-dialog"> <!-- Diálogo modal -->
+      <div class="modal-content"> <!-- Contenido modal -->
+        <form id="newContactForm"> <!-- Formulario para nuevo contacto -->
+          <div class="modal-header"> <!-- Encabezado del modal -->
+            <h5 class="modal-title">Nuevo contacto</h5> <!-- Título modal -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button> <!-- Cerrar modal -->
           </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label">Nombre</label>
-              <input id="cName" class="form-control" required>
+          <div class="modal-body"> <!-- Cuerpo modal con campos -->
+            <div class="mb-3"> <!-- Campo nombre -->
+              <label class="form-label">Nombre</label> <!-- Label nombre -->
+              <input id="cName" class="form-control" required> <!-- Input nombre requerido -->
             </div>
-            <div class="mb-3">
-              <label class="form-label">Alias</label>
-              <input id="cAlias" class="form-control" placeholder="Opcional">
+            <div class="mb-3"> <!-- Campo alias -->
+              <label class="form-label">Alias</label> <!-- Label alias -->
+              <input id="cAlias" class="form-control" placeholder="Opcional"> <!-- Input alias opcional -->
             </div>
-            <div class="mb-3">
-              <label class="form-label">Cuenta</label>
-              <input id="cAccount" class="form-control" required placeholder="Ej: 999-888">
+            <div class="mb-3"> <!-- Campo cuenta -->
+              <label class="form-label">Cuenta</label> <!-- Label cuenta -->
+              <input id="cAccount" class="form-control" required placeholder="Ej: 999-888"> <!-- Input cuenta requerido -->
             </div>
           </div>
-          <div class="modal-footer">
-            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Guardar contacto</button>
+          <div class="modal-footer"> <!-- Footer del modal con botones -->
+            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button> <!-- Cancelar -->
+            <button class="btn btn-primary" type="submit">Guardar contacto</button> <!-- Guardar contacto -->
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
 
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/ui.js"></script>
-  <script src="../assets/js/auth.js"></script>
-  <script src="../assets/js/wallet.js"></script>
-  <script src="../assets/js/app.js"></script>
-</body>
-</html>
+  <script src="../assets/js/data.js"></script> <!-- Datos y persistencia (localStorage) -->
+  <script src="../assets/js/ui.js"></script> <!-- Utilidades de UI y mensajes -->
+  <script src="../assets/js/auth.js"></script> <!-- Manejo de autenticación/logout -->
+  <script src="../assets/js/wallet.js"></script> <!-- Lógica de wallet: saldo, transferencias -->
+  <script src="../assets/js/app.js"></script> <!-- Inicialización general según data-page -->
+</body> <!-- Fin del body -->
+</html> <!-- Fin del documento -->
