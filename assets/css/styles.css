@@ -1,36 +1,36 @@
-/* Paleta suave tipo fintech */
-:root{
-  --bg-soft: #f6f8fb;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --brand: #0d6efd;
+/* Paleta suave tipo fintech */ /* colores y variables CSS globales */
+:root{ /* define variables de color globales */
+  --bg-soft: #f6f8fb; /* fondo claro y suave */
+  --ink: #0f172a; /* texto oscuro principal */
+  --muted: #64748b; /* texto gris neutro */
+  --brand: #0d6efd; /* azul de marca (primario) */
 }
 
-.bg-soft{ background: var(--bg-soft); }
-.text-muted2{ color: var(--muted); }
+.bg-soft{ background: var(--bg-soft); } /* aplica fondo suave a toda la página */
+.text-muted2{ color: var(--muted); } /* texto gris para información secundaria */
 
-.brand-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
-  padding:.35rem .6rem;
-  border-radius:999px;
-  background:#eaf2ff;
-  color:var(--brand);
-  font-weight:600;
-  font-size:.9rem;
+.brand-badge{ /* etiqueta pequeña con marca */
+  display:inline-flex; /* contenedor flexible en línea */
+  align-items:center; /* centra verticalmente */
+  gap:.5rem; /* espacio entre elementos internos */
+  padding:.35rem .6rem; /* relleno pequeño alrededor */
+  border-radius:999px; /* hace forma de píldora (esquinas redondeadas) */
+  background:#204a8d; /* fondo azul muy claro */
+  color:var(--brand); /* texto azul de marca */
+  font-weight:600; /* texto más pesado */
+  font-size:.9rem; /* tamaño reducido */
 }
 
-.money{
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .2px;
+.money{ /* estilos para montos/números */
+  font-variant-numeric: tabular-nums; /* números de ancho fijo para alineación */
+  letter-spacing: .2px; /* espaciado entre letras para legibilidad */
 }
 
-.pointer{ cursor: pointer; }
+.pointer{ cursor: pointer; } /* muestra cursor de mano sobre elementos */
 
-.card-hover:hover{
-  transform: translateY(-2px);
-  transition: .15s ease-in-out;
+.card-hover:hover{ /* efecto al pasar mouse sobre cards */
+  transform: translateY(-2px); /* sube ligeramente la tarjeta */
+  transition: .15s ease-in-out; /* animación suave y rápida */
 }
 
-.small-help{ font-size: .9rem; color: var(--muted); }
+.small-help{ font-size: .9rem; color: var(--muted); } /* texto pequeño de ayuda en gris */

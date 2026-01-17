@@ -1,77 +1,136 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Depósitos | Alke Wallet</title>
+<!doctype html> <!-- Declara HTML5 -->
+<html lang="es"> <!-- Idioma: español -->
+<head> <!-- Metadatos y enlaces a recursos -->
+  <meta charset="utf-8" /> <!-- Conjunto de caracteres UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsable para móviles -->
+  <title>Depósitos | Alke Wallet</title> <!-- Título de la pestaña -->
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Estilos personalizados -->
+</head> <!-- Fin head -->
 
-<body class="bg-soft" data-page="deposit">
+<body class="bg-soft" data-page="deposit"> <!-- Body con clase visual y data-page para JS -->
 
-  <nav class="navbar navbar-expand-lg bg-white border-bottom">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom"> <!-- Barra de navegación el estilo indica  -->
+    <div class="container"> <!-- Contenedor centrado -->
+      <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a> <!-- Enlace al menú principal -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"> <!-- Botón collapsible -->
+        <span class="navbar-toggler-icon"></span> <!-- Icono del toggler -->
       </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto gap-2">
-          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li>
-          <li class="nav-item"><a class="nav-link" href="sendmoney.html">Enviar dinero</a></li>
-          <li class="nav-item"><a class="nav-link" href="transactions.html">Movimientos</a></li>
-          <li class="nav-item"><button id="btnLogout" class="btn btn-outline-danger btn-sm" onclick="logout()">Salir</button></li>
+      <div id="nav" class="collapse navbar-collapse"> <!-- Elementos del nav colapsable -->
+        <ul class="navbar-nav ms-auto gap-2"> <!-- Menú alineado a la derecha -->
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li> <!-- Enlace Menú -->
+          <li class="nav-item"><a class="nav-link" href="sendmoney.html">Enviar dinero</a></li> <!-- Enlace enviar -->
+          <li class="nav-item"><a class="nav-link" href="transactions.html">Movimientos</a></li> <!-- Enlace movimientos -->
+          <li class="nav-item"><button id="btnLogout" class="btn btn-outline-danger btn-sm" onclick="logout()">Salir</button></li> <!-- Botón logout con id -->
         </ul>
       </div>
     </div>
   </nav>
 
-  <main class="container py-4" style="max-width: 760px;">
-    <div class="card border-0 shadow-sm">
-      <div class="card-body p-4">
-        <h1 class="h4 mb-3">Depósitos y Retiros</h1>
+  <main class="container py-4 mt-4" style="width: 350px;" col-6> <!-- Contenedor principal con ancho máximo -->
+    <div class="card border-0 shadow-sm"> <!-- Card para agrupar contenido -->
+      <div class="card-body p-4"> <!-- Padding interno de la card -->
+        <h1 class="h4 mb-3">Depósitos y Retiros</h1> <!-- Título de la sección -->
 
-        <div class="mb-3">
-          <div class="text-secondary">Saldo actual</div>
-          <div id="balanceValue" class="h3 money mb-0">$0</div>
+        <div class="mb-6 "> <!-- Bloque saldo -->
+          <div class="text-secondary">Saldo actual</div> <!-- Etiqueta saldo -->
+          <div id="balanceValue" class="h3 money mb-0">$0</div> <!-- Saldo mostrado dinámicamente por wallet.js -->
         </div>
 
-        <form id="depositForm" class="row g-3">
-          <div class="col-12">
-            <label class="form-label">Monto</label>
-            <input id="amount" class="form-control" type="number" min="1" required placeholder="Ej: 5000">
-            <div class="form-text">Ingresa el monto en CLP.</div>
+        <form id="depositForm" class="row g-3" class= "mb-6" > <!-- Form: id usado por wallet.js para operaciones -->
+          <div class="col-6> <!-- Columna completa para el monto -->
+            <label class="form-label">Monto</label> <!-- Label monto -->
+            <input id="amount" class="form-control" type="number" min="1" required placeholder="Ej: 5000"> <!-- Input monto con restricciones -->
+            <div class="form-text">Ingresa el monto en CLP.</div> <!-- Ayuda de formato -->
           </div>
 
-          <div class="col-12">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="action" id="rDeposit" value="deposit" checked>
-              <label class="form-check-label" for="rDeposit">Depósito</label>
+          <div class="col-12" class="row g-3"> <!-- Opciones depósito/retiro -->
+            <div class="form-check"> <!-- Opción depósito -->
+              <input class="form-check-input" type="radio" name="action" id="rDeposit" value="deposit" checked> <!-- Radio deposit -->
+              <label class="form-check-label" for="rDeposit">Depósito</label> <!-- Label deposit -->
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="action" id="rWithdraw" value="withdraw">
-              <label class="form-check-label" for="rWithdraw">Retiro</label>
+            <div class="form-check"> <!-- Opción retiro -->
+              <input class="form-check-input" type="radio" name="action" id="rWithdraw" value="withdraw"> <!-- Radio withdraw -->
+              <label class="form-check-label" for="rWithdraw">Retiro</label> <!-- Label withdraw -->
             </div>
           </div>
 
-          <div class="col-12">
-            <button class="btn btn-primary w-100" type="submit">Realizar operación</button>
+          <div class="col-6"> <!-- Botón enviar -->
+            <button class="btn btn-primary w-100" type="submit">Realizar operación</button> <!-- Submit del formulario -->
           </div>
-        </form>
+        </form> <!-- Fin form -->
 
       </div>
     </div>
   </main>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
 
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/ui.js"></script>
-  <script src="../assets/js/auth.js"></script>
-  <script src="../assets/js/wallet.js"></script>
-  <script src="../assets/js/app.js"></script>
-</body>
-</html>
+  <script src="../assets/js/data.js"></script> <!-- Datos y persistencia local -->
+  <script src="../assets/js/ui.js"></script> <!-- Utilidades UI -->
+  <script src="../assets/js/auth.js"></script> <!-- Manejo de sesión -->
+  <script src="../assets/js/wallet.js"></script> <!-- Lógica de wallet: actualizar saldo, procesar operaciones -->
+  <script src="../assets/js/app.js"></script> <!-- Inicializador general según data-page -->
+</body> <!-- Fin body -->
+</html> <!-- Fin documento -->
+<!--
+Resumen de estilos aplicados (resumen final):
+
+- `body.bg-soft`: clase definida en `assets/css/styles.css` que aplica
+  un color de fondo suave y ajustes globales de tipografía y espaciado.
+
+- `nav.navbar`, `.navbar-brand`, `.nav-link`: estilos de Bootstrap para la
+  barra de navegación (layout responsivo, padding, colapso en pantallas
+  pequeñas). `border-bottom` añade una línea inferior visible.
+
+- `.container`: limita el ancho y centra el contenido; combina con utilidades
+  `py-*` para padding vertical (ej. `py-4`).
+
+- `main.container`: padding vertical (`py-4`) y en este archivo `style="max-width: 760px;"`
+  para restringir el ancho principal de la vista.
+
+- `.card`, `.card-body`: Bootstrap provee sombra, bordes y padding; se usa para
+  agrupar secciones (saldo, formulario). `.shadow-sm` añade sombra ligera.
+
+- encabezados (`h1`, `h4`, `h3`, `h6`): usan utilidades de margen (`mb-*`) y
+  tamaños tipográficos de Bootstrap; se armonizan con las reglas globales del CSS.
+
+- `#balanceValue` y `.money`: la clase `.money` (definida en `styles.css`) suele
+  formatear la fuente (peso, tamaño) y el espaciado para destacar montos monetarios;
+  `#balanceValue` es actualizado por `wallet.js`.
+
+- `form`, `.form-control`, `.form-label`, `.form-text`: Bootstrap aplica estilos
+  a inputs, labels y textos de ayuda; inputs ocupan el 100% del ancho de su contenedor
+  y reciben borde y padding estándar.
+
+- `input[type="number"]#amount`: atributo `min="1"` y `required` no son estilos
+  pero condicionan la entrada; el aspecto lo marca `.form-control`.
+
+- `.form-check` (radios): Bootstrap maneja la disposición y el espaciado de
+  opciones tipo radio/checkbox con sus labels asociados.
+
+- `.btn`, `.btn-primary`, `.btn-outline-*`: clases de Bootstrap para botones
+  con colores, padding y comportamientos responsive; `.w-100` hace que el botón
+  ocupe todo el ancho del contenedor.
+
+- Modal (`.modal`, `.modal-dialog`, `.modal-content`): estilos y comportamiento
+  provistos por Bootstrap; los inputs dentro del modal usan las mismas clases
+  de formulario para estilo consistente.
+
+- Componentes utilitarios: clases como `d-flex`, `gap-2`, `mt-3`, `mb-3`,
+  `g-3` (grid gap) y `mx-auto` son utilidades de Bootstrap usadas para espaciado
+  y alineación sin CSS adicional.
+
+- Reglas personalizadas en `assets/css/styles.css`: además de las utilidades
+  de Bootstrap, el proyecto define clases propias (por ejemplo `.bg-soft`,
+  `.money`, `.card-hover`) que ajustan colores, transiciones y tamaños para
+  adaptar la apariencia a la identidad del proyecto.
+
+Notas:
+- Bootstrap proporciona la mayor parte del diseño y la apariencia base.
+- `assets/css/styles.css` contiene las personalizaciones (colores, tamaños,
+  clases utility específicas del proyecto). Para cambios visuales, editar
+  `assets/css/styles.css` es lo recomendado.
+-->

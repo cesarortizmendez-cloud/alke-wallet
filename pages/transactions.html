@@ -1,78 +1,115 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Movimientos | Alke Wallet</title>
+<!doctype html> <!-- Declara HTML5 -->
+<html lang="es"> <!-- Idioma: español -->
+<head> <!-- Metadatos y recursos -->
+  <meta charset="utf-8" /> <!-- UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+  <title>Movimientos | Alke Wallet</title> <!-- Título de la página -->
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Estilos personalizados del proyecto -->
+</head> <!-- Fin head -->
 
-<body class="bg-soft" data-page="transactions">
+<body class="bg-soft" data-page="transactions"> <!-- Body con clase personalizada y data-page -->
 
-  <nav class="navbar navbar-expand-lg bg-white border-bottom">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom"> <!-- Barra de navegación -->
+    <div class="container"> <!-- Contenedor centrado -->
+      <a class="navbar-brand fw-bold" href="menu.html">Alke Wallet</a> <!-- Marca/enlace al menú -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"> <!-- Toggle para móviles -->
+        <span class="navbar-toggler-icon"></span> <!-- Icono del toggle -->
       </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto gap-2">
-          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li>
-          <li class="nav-item"><a class="nav-link" href="deposit.html">Depósitos</a></li>
-          <li class="nav-item"><a class="nav-link" href="sendmoney.html">Enviar dinero</a></li>
-          <li class="nav-item"><button class="btn btn-outline-danger btn-sm" onclick="logout()">Salir</button></li>
+      <div id="nav" class="collapse navbar-collapse"> <!-- Menú colapsable -->
+        <ul class="navbar-nav ms-auto gap-2"> <!-- Lista de navegación alineada a la derecha -->
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li> <!-- Enlace menú -->
+          <li class="nav-item"><a class="nav-link" href="deposit.html">Depósitos</a></li> <!-- Enlace depósitos -->
+          <li class="nav-item"><a class="nav-link" href="sendmoney.html">Enviar dinero</a></li> <!-- Enlace enviar dinero -->
+          <li class="nav-item"><button class="btn btn-outline-danger btn-sm" onclick="logout()">Salir</button></li> <!-- Botón logout -->
         </ul>
       </div>
     </div>
   </nav>
 
-  <main class="container py-4">
-    <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-3">
-      <div>
-        <h1 class="h4 mb-1">Últimos movimientos</h1>
-        <div class="text-secondary">Saldo: <span id="balanceValue" class="money">$0</span></div>
+  <main class="container py-4"> <!-- Contenedor principal con padding vertical -->
+    <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-3"> <!-- Fila superior con título y filtros -->
+      <div> <!-- Bloque izquierdo con título y saldo -->
+        <h1 class="h4 mb-1">Últimos movimientos</h1> <!-- Título -->
+        <div class="text-secondary">Saldo: <span id="balanceValue" class="money">$0</span></div> <!-- Saldo dinámico -->
       </div>
 
-      <div style="min-width: 220px;">
-        <label class="form-label mb-1">Filtrar por tipo</label>
-        <select id="filterType" class="form-select">
-          <option value="all">Todos</option>
-          <option value="deposit">Deposits</option>
-          <option value="withdraw">Withdraw</option>
-          <option value="transfer">Transfer</option>
-          <option value="contact">Contact</option>
+      <div style="min-width: 220px;"> <!-- Bloque derecho para filtros -->
+        <label class="form-label mb-1">Filtrar por tipo</label> <!-- Label filtro -->
+        <select id="filterType" class="form-select"> <!-- Select tipo filtro -->
+          <option value="all">Todos</option> <!-- Opción todos -->
+          <option value="deposit">Deposits</option> <!-- Opción depósitos -->
+          <option value="withdraw">Withdraw</option> <!-- Opción retiros -->
+          <option value="transfer">Transfer</option> <!-- Opción transferencias -->
+          <option value="contact">Contact</option> <!-- Opción contacto -->
         </select>
       </div>
     </div>
 
-    <div class="card border-0 shadow-sm">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover align-middle mb-0">
+    <div class="card border-0 shadow-sm"> <!-- Tarjeta que contiene la tabla -->
+      <div class="card-body"> <!-- Cuerpo de la tarjeta -->
+        <div class="table-responsive"> <!-- Wrapper responsive para la tabla -->
+          <table class="table table-hover align-middle mb-0"> <!-- Tabla con hover y alineación centro -->
             <thead>
               <tr>
-                <th>Fecha</th>
-                <th>Tipo</th>
-                <th>Monto</th>
-                <th>Detalle</th>
+                <th>Fecha</th> <!-- Columna fecha -->
+                <th>Tipo</th> <!-- Columna tipo -->
+                <th>Monto</th> <!-- Columna monto -->
+                <th>Detalle</th> <!-- Columna detalle -->
               </tr>
             </thead>
-            <tbody id="txBody"></tbody>
+            <tbody id="txBody"></tbody> <!-- Cuerpo de la tabla poblado por wallet.js -->
           </table>
         </div>
       </div>
     </div>
   </main>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
 
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/ui.js"></script>
-  <script src="../assets/js/auth.js"></script>
-  <script src="../assets/js/wallet.js"></script>
-  <script src="../assets/js/app.js"></script>
-</body>
-</html>
+  <script src="../assets/js/data.js"></script> <!-- Datos y persistencia -->
+  <script src="../assets/js/ui.js"></script> <!-- Utilidades de UI -->
+  <script src="../assets/js/auth.js"></script> <!-- Autenticación y logout -->
+  <script src="../assets/js/wallet.js"></script> <!-- Manejo de transacciones y saldo -->
+  <script src="../assets/js/app.js"></script> <!-- Inicializador general según data-page -->
+</body> <!-- Fin body -->
+</html> <!-- Fin documento -->
+
+<!--
+Resumen de estilos y etiquetas empleadas:
+
+- `body.bg-soft`: clase personalizada en `assets/css/styles.css` que aplica
+  el color de fondo principal y ajustes de tipografía/espaciado global.
+
+- `nav.navbar`, `.navbar-brand`, `.nav-link`: componentes de Bootstrap para la
+  navegación; gestionan layout responsive, paddings y comportamiento de colapso.
+
+- `.container`: limita el ancho del contenido y centra elementos; combinada con
+  utilidades `py-*` (p. ej. `py-4`) controla el espacio vertical.
+
+- `.d-flex`, `.flex-wrap`, `.align-items-end`, `.justify-content-between`,
+  `.gap-2`, `.mb-3`: utilidades de Bootstrap usadas para distribuir el título,
+  el saldo y el área de filtros en una fila adaptativa.
+
+- `.form-label`, `.form-select`: estilos de formulario de Bootstrap para labels
+  y selects (ancho 100%, padding y bordes estándar).
+
+- `.card`, `.card-body`, `.shadow-sm`, `.border-0`: estructura y apariencia de
+  tarjetas que agrupan contenido con sombra ligera y sin borde visual.
+
+- `.table`, `.table-hover`, `.align-middle`, `.table-responsive`: estilos que
+  dan formato a la tabla de movimientos, permiten scroll horizontal en pantallas
+  pequeñas y añaden efecto hover y alineación vertical al contenido de celdas.
+
+- `#balanceValue`, `.money`: `.money` es una clase del CSS del proyecto que
+  resalta montos (tamaño y peso de fuente); `#balanceValue` es actualizado por JS.
+
+- Botones, inputs y selects usan directamente las clases de Bootstrap para
+  apariencia; cualquier personalización adicional debe revisarse en
+  `assets/css/styles.css` (p. ej. `.bg-soft`, `.money`, `.card-hover`).
+
+Para modificar la apariencia global, editar `assets/css/styles.css` es la vía
+recomendada; Bootstrap aporta la base y las utilidades para layout y espaciado.
+-->
