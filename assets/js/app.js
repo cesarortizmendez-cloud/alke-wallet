@@ -1,5 +1,8 @@
 /** app.js - Conecta eventos por página usando data-page */ // comentario: cabecera y propósito del archivo
 
+/** se incorpora este texto solo para probar el trebajo en rama_backend */
+
+
 $(function () { // Ejecuta cuando el DOM está listo
   const page = $("body").data("page"); // Lee el atributo data-page del body
 
